@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e253d93622dd4245a6750f0aae0ecfbd" Name="Diagram1">
+        <EntityTypeShape EntityType="STAFFModel.Bol" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="STAFFModel.Childs" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="STAFFModel.Staff" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="STAFFModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="STAFFModel.Uchet" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="STAFFModel.Vacation" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <AssociationConnector Association="STAFFModel.FK_Bol_Staff" ManuallyRouted="false" />
+        <AssociationConnector Association="STAFFModel.FK_Childs_Staff" ManuallyRouted="false" />
+        <AssociationConnector Association="STAFFModel.FK_Staff_Uchet" ManuallyRouted="false" />
+        <AssociationConnector Association="STAFFModel.FK_Uchet_Staff" ManuallyRouted="false" />
+        <AssociationConnector Association="STAFFModel.FK_Uchet_Staff1" ManuallyRouted="false" />
+        <AssociationConnector Association="STAFFModel.FK_Vacation_Staff" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,469 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="STAFFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bol">
+          <Key>
+            <PropertyRef Name="IdBol" />
+          </Key>
+          <Property Name="IdBol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdChel" Type="int" Nullable="false" />
+          <Property Name="BolStart" Type="date" Nullable="false" />
+          <Property Name="BolFinish" Type="date" />
+        </EntityType>
+        <EntityType Name="Childs">
+          <Key>
+            <PropertyRef Name="id_child" />
+          </Key>
+          <Property Name="id_child" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_chel" Type="int" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="Birth" Type="date" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="Id_chel" />
+          </Key>
+          <Property Name="Id_chel" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Birth" Type="date" Nullable="false" />
+          <Property Name="Edu" Type="varchar" MaxLength="500" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="500" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="IdPhoto" Type="int" />
+          <Property Name="DateOfReceipt" Type="date" Nullable="false" />
+          <Property Name="IdUchet" Type="int" />
+          <Property Name="Position" Type="varchar" MaxLength="500" />
+          <Property Name="Division" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Uchet">
+          <Key>
+            <PropertyRef Name="IdUchet" />
+          </Key>
+          <Property Name="IdUchet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdChel" Type="int" Nullable="false" />
+          <Property Name="DaytimeStart" Type="datetime2" Precision="7" />
+          <Property Name="DaytimeFinish" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Vacation">
+          <Key>
+            <PropertyRef Name="IdVac" />
+          </Key>
+          <Property Name="IdVac" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdChel" Type="int" Nullable="false" />
+          <Property Name="VacStart" Type="date" Nullable="false" />
+          <Property Name="VacFinish" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Bol_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Bol" Type="Self.Bol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id_chel" />
+            </Principal>
+            <Dependent Role="Bol">
+              <PropertyRef Name="IdChel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Childs_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Childs" Type="Self.Childs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id_chel" />
+            </Principal>
+            <Dependent Role="Childs">
+              <PropertyRef Name="id_chel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Uchet">
+          <End Role="Uchet" Type="Self.Uchet" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uchet">
+              <PropertyRef Name="IdUchet" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="IdUchet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Uchet_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Uchet" Type="Self.Uchet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id_chel" />
+            </Principal>
+            <Dependent Role="Uchet">
+              <PropertyRef Name="IdChel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Uchet_Staff1">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Uchet" Type="Self.Uchet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id_chel" />
+            </Principal>
+            <Dependent Role="Uchet">
+              <PropertyRef Name="IdChel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vacation_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Vacation" Type="Self.Vacation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id_chel" />
+            </Principal>
+            <Dependent Role="Vacation">
+              <PropertyRef Name="IdChel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="STAFFModelStoreContainer">
+          <EntitySet Name="Bol" EntityType="Self.Bol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Childs" EntityType="Self.Childs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uchet" EntityType="Self.Uchet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vacation" EntityType="Self.Vacation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Bol_Staff" Association="Self.FK_Bol_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Bol" EntitySet="Bol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Childs_Staff" Association="Self.FK_Childs_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Childs" EntitySet="Childs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Uchet" Association="Self.FK_Staff_Uchet">
+            <End Role="Uchet" EntitySet="Uchet" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Uchet_Staff" Association="Self.FK_Uchet_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Uchet" EntitySet="Uchet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Uchet_Staff1" Association="Self.FK_Uchet_Staff1">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Uchet" EntitySet="Uchet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vacation_Staff" Association="Self.FK_Vacation_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Vacation" EntitySet="Vacation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="STAFFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bol">
+          <Key>
+            <PropertyRef Name="IdBol" />
+          </Key>
+          <Property Name="IdBol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdChel" Type="Int32" Nullable="false" />
+          <Property Name="BolStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BolFinish" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Bol_Staff" FromRole="Bol" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Childs">
+          <Key>
+            <PropertyRef Name="id_child" />
+          </Key>
+          <Property Name="id_child" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_chel" Type="Int32" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Birth" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Childs_Staff" FromRole="Childs" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="Id_chel" />
+          </Key>
+          <Property Name="Id_chel" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Edu" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdPhoto" Type="Int32" />
+          <Property Name="DateOfReceipt" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdUchet" Type="Int32" />
+          <Property Name="Position" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Division" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bol" Relationship="Self.FK_Bol_Staff" FromRole="Staff" ToRole="Bol" />
+          <NavigationProperty Name="Childs" Relationship="Self.FK_Childs_Staff" FromRole="Staff" ToRole="Childs" />
+          <NavigationProperty Name="Uchet" Relationship="Self.FK_Staff_Uchet" FromRole="Staff" ToRole="Uchet" />
+          <NavigationProperty Name="Uchet1" Relationship="Self.FK_Uchet_Staff" FromRole="Staff" ToRole="Uchet" />
+          <NavigationProperty Name="Uchet2" Relationship="Self.FK_Uchet_Staff1" FromRole="Staff" ToRole="Uchet" />
+          <NavigationProperty Name="Vacation" Relationship="Self.FK_Vacation_Staff" FromRole="Staff" ToRole="Vacation" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Uchet">
+          <Key>
+            <PropertyRef Name="IdUchet" />
+          </Key>
+          <Property Name="IdUchet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdChel" Type="Int32" Nullable="false" />
+          <Property Name="DaytimeStart" Type="DateTime" Precision="7" />
+          <Property Name="DaytimeFinish" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_Uchet" FromRole="Uchet" ToRole="Staff" />
+          <NavigationProperty Name="Staff1" Relationship="Self.FK_Uchet_Staff" FromRole="Uchet" ToRole="Staff" />
+          <NavigationProperty Name="Staff2" Relationship="Self.FK_Uchet_Staff1" FromRole="Uchet" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Vacation">
+          <Key>
+            <PropertyRef Name="IdVac" />
+          </Key>
+          <Property Name="IdVac" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdChel" Type="Int32" Nullable="false" />
+          <Property Name="VacStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VacFinish" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Vacation_Staff" FromRole="Vacation" ToRole="Staff" />
+        </EntityType>
+        <Association Name="FK_Bol_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Bol" Type="Self.Bol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id_chel" />
+            </Principal>
+            <Dependent Role="Bol">
+              <PropertyRef Name="IdChel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Childs_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Childs" Type="Self.Childs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id_chel" />
+            </Principal>
+            <Dependent Role="Childs">
+              <PropertyRef Name="id_chel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Uchet">
+          <End Role="Uchet" Type="Self.Uchet" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uchet">
+              <PropertyRef Name="IdUchet" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="IdUchet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Uchet_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Uchet" Type="Self.Uchet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id_chel" />
+            </Principal>
+            <Dependent Role="Uchet">
+              <PropertyRef Name="IdChel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Uchet_Staff1">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Uchet" Type="Self.Uchet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id_chel" />
+            </Principal>
+            <Dependent Role="Uchet">
+              <PropertyRef Name="IdChel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vacation_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Vacation" Type="Self.Vacation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id_chel" />
+            </Principal>
+            <Dependent Role="Vacation">
+              <PropertyRef Name="IdChel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="STAFFEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bol" EntityType="Self.Bol" />
+          <EntitySet Name="Childs" EntityType="Self.Childs" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Uchet" EntityType="Self.Uchet" />
+          <EntitySet Name="Vacation" EntityType="Self.Vacation" />
+          <AssociationSet Name="FK_Bol_Staff" Association="Self.FK_Bol_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Bol" EntitySet="Bol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Childs_Staff" Association="Self.FK_Childs_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Childs" EntitySet="Childs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Uchet" Association="Self.FK_Staff_Uchet">
+            <End Role="Uchet" EntitySet="Uchet" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Uchet_Staff" Association="Self.FK_Uchet_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Uchet" EntitySet="Uchet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Uchet_Staff1" Association="Self.FK_Uchet_Staff1">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Uchet" EntitySet="Uchet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vacation_Staff" Association="Self.FK_Vacation_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Vacation" EntitySet="Vacation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="STAFFModelStoreContainer" CdmEntityContainer="STAFFEntities">
+          <EntitySetMapping Name="Bol">
+            <EntityTypeMapping TypeName="STAFFModel.Bol">
+              <MappingFragment StoreEntitySet="Bol">
+                <ScalarProperty Name="IdBol" ColumnName="IdBol" />
+                <ScalarProperty Name="IdChel" ColumnName="IdChel" />
+                <ScalarProperty Name="BolStart" ColumnName="BolStart" />
+                <ScalarProperty Name="BolFinish" ColumnName="BolFinish" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Childs">
+            <EntityTypeMapping TypeName="STAFFModel.Childs">
+              <MappingFragment StoreEntitySet="Childs">
+                <ScalarProperty Name="id_child" ColumnName="id_child" />
+                <ScalarProperty Name="id_chel" ColumnName="id_chel" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff">
+            <EntityTypeMapping TypeName="STAFFModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="Id_chel" ColumnName="Id_chel" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+                <ScalarProperty Name="Edu" ColumnName="Edu" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
+                <ScalarProperty Name="DateOfReceipt" ColumnName="DateOfReceipt" />
+                <ScalarProperty Name="IdUchet" ColumnName="IdUchet" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="STAFFModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uchet">
+            <EntityTypeMapping TypeName="STAFFModel.Uchet">
+              <MappingFragment StoreEntitySet="Uchet">
+                <ScalarProperty Name="IdUchet" ColumnName="IdUchet" />
+                <ScalarProperty Name="IdChel" ColumnName="IdChel" />
+                <ScalarProperty Name="DaytimeStart" ColumnName="DaytimeStart" />
+                <ScalarProperty Name="DaytimeFinish" ColumnName="DaytimeFinish" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vacation">
+            <EntityTypeMapping TypeName="STAFFModel.Vacation">
+              <MappingFragment StoreEntitySet="Vacation">
+                <ScalarProperty Name="IdVac" ColumnName="IdVac" />
+                <ScalarProperty Name="IdChel" ColumnName="IdChel" />
+                <ScalarProperty Name="VacStart" ColumnName="VacStart" />
+                <ScalarProperty Name="VacFinish" ColumnName="VacFinish" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

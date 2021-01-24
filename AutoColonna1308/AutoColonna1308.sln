@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoColonna1308", "AutoColonna1308.csproj", "{A28AE631-2D65-4975-B207-693959F883BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A28AE631-2D65-4975-B207-693959F883BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A28AE631-2D65-4975-B207-693959F883BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A28AE631-2D65-4975-B207-693959F883BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A28AE631-2D65-4975-B207-693959F883BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0F65E5F1-4ED3-4A06-97C5-94DEA35AA738}
+	EndGlobalSection
+EndGlobal
